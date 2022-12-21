@@ -3,7 +3,13 @@ const express = require("express");
 const Task = require("./model/taskModel.js");
 const taskRoutes = require("./routes/taskRoute.js")
 const cors = require("cors");
-
+const cors = require('cors');
+const corsOptions ={
+    origin: ["http://localhost:3000", "https://mern-task-app.onrender.com"], 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 const app = express();
 
 const connectDB = require("./config/connectDB");
@@ -12,7 +18,7 @@ const PORT = process.env.PORT || 5000;
 //express middleware
 app.use(express.json())
 app.use(express.urlencoded({extended:false}));
-app.use(cors({origin: ["http://localhost:3000", "https://mern-task-app.onrender.com"],}));
+//app.use(cors({origin: ["http://localhost:3000", "https://mern-task-app.onrender.com"],}));
 app.use("/api/tasks",taskRoutes);
 
 //Routes
