@@ -43,8 +43,14 @@ app.use(express.urlencoded({extended:false}));
 
 
 //cors
-app.use(cors({origin:["http://localhost:3000","https://mern-task-app.onrender.com",],
-credentials: true}))
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
+app.use(cors())
 
 //Routes
 app.get("/",(req,res)=>{
