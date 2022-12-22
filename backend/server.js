@@ -11,13 +11,6 @@ const app = express();
 const connectDB = require("./config/connectDB");
 
 const PORT = process.env.PORT || 5000;
-//express middleware
-app.use(express.json())
-app.use(express.urlencoded({extended:false}));
-//app.use(cors({origin: ["http://localhost:3000", "https://mern-task-app.onrender.com"],}));
-
-
-//cors
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
@@ -43,6 +36,14 @@ const corsOptions ={
     optionSuccessStatus:200
 }
 app.use(cors(corsOptions));
+//express middleware
+app.use(express.json())
+app.use(express.urlencoded({extended:false}));
+//app.use(cors({origin: ["http://localhost:3000", "https://mern-task-app.onrender.com"],}));
+
+
+//cors
+
 //Routes
 app.get("/",(req,res)=>{
     res.send("Home Page");
