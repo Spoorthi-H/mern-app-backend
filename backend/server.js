@@ -2,7 +2,7 @@ const dotenv = require("dotenv").config();
 const express = require("express");
 const Task = require("./model/taskModel.js");
 const taskRoutes = require("./routes/taskRoute.js")
-//const cors = require("cors");
+const cors = require("cors");
 const app = express();
 //const cors = require('cors');
 
@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json())
 app.use(express.urlencoded({extended:false}));
 //app.use(cors({origin: ["http://localhost:3000", "https://mern-task-app.onrender.com"],}));
-app.use("/api/tasks",taskRoutes);
+
 
 //cors
 const corsOptions ={
@@ -28,7 +28,7 @@ app.use(cors(corsOptions));
 app.get("/",(req,res)=>{
     res.send("Home Page");
 })
-
+app.use("/api/tasks",taskRoutes);
 const startserver = async () => {
     try {
         await connectDB();
