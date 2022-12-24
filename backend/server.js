@@ -3,6 +3,7 @@ const express = require("express");
 const Task = require("./model/taskModel.js");
 const taskRoutes = require("./routes/taskRoute.js")
 const cors = require("cors");
+
 const app = express();
 //const cors = require('cors');
 
@@ -37,26 +38,28 @@ const corsOptions ={
 }
 app.use(cors(corsOptions)); */
 //express middleware
-app.use(express.json())
+app.use(express.json())//middleware
 app.use(express.urlencoded({extended:false}));
 //app.use(cors({origin: ["http://localhost:3000", "https://mern-task-app.onrender.com"],}));
 
 
 //cors
 app.use(function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    //res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
-app.use(cors())
+//app.use(cors())
+app.use(cors({origin: [`http://localhost:3000`, `https://mern-task-app.onrender.com`],}));
 
 //Routes
 app.get("/",(req,res)=>{
     res.send("Home Page");
 })
 app.use("/api/tasks",taskRoutes);
+
 const startserver = async () => {
     try {
         await connectDB();
