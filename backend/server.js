@@ -52,7 +52,7 @@ app.use(function(req, res, next) {
     next();
 });
 //app.use(cors())
-app.use(cors({origin: [`http://localhost:3000`, `https://mern-task-app.onrender.com`],}));
+app.use(cors({origin: ["https://mern-task-app.onrender.com" ,"http://localhost:3000" ]}));
 
 //Routes
 app.get("/",(req,res)=>{
